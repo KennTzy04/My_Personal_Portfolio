@@ -3624,6 +3624,7 @@ a:focus {
   font-weight: 700;
   margin-bottom: 6px;
   background: linear-gradient(135deg, #00c9ff, #92fe9d);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
