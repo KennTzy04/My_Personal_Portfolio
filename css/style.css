@@ -2087,6 +2087,7 @@ a:focus {
   bottom: 0;
   left: 50%;
   margin-left: -1px;
+  z-index: -1;
 }
 
 .experience .timeline .timeline-item {
@@ -2174,7 +2175,12 @@ a:focus {
   color: #fff;
 }
 
+/* change border right to left 3px solid */
 .experience .timeline .timeline-item.right .timeline-text {
+  border-left: none;
+  border-left: 3px solid #00ffff;
+}
+.experience .timeline .timeline-item.left .timeline-text {
   border-left: none;
   border-right: 3px solid #00ffff;
 }
