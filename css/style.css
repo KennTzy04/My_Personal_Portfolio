@@ -2767,8 +2767,9 @@ a:focus {
 
 /* Image */
 .custom-modal-content img {
-  width: 100%;
-  max-height: 400px;
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh; /* Responsive to screen height */
   object-fit: contain;
   border-radius: 12px;
   margin-bottom: 20px;
