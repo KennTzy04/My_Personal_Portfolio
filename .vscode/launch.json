@@ -1,0 +1,17 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    
+        
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "file:///C:/Users/kennc/OneDrive%20-%20Janrylle%20Espinosa/Desktop/MY%20PERSONAL%20PORTFOLIO%20NEW/MAO%20NING%20GI%20EDIT%20NAKO/MAO%20NAJUD%20NI%20for%20cursor/developer-portfolio-template/css/index.html",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
