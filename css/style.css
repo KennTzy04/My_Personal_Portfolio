@@ -19,17 +19,11 @@ body {
   line-height: 1.6;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
   font-weight: 700;
   line-height: 1.2;
 }
-
 a {
   color: var(--primary-color);
   transition: all 0.3s ease;
@@ -130,6 +124,7 @@ a:focus {
   cursor: pointer;
   transition: all 0.35s ease;
   box-shadow: 0 4px 20px rgba(0, 255, 229, 0.1);
+  touch-action: manipulation;
 }
 
 .back-to-top i {
@@ -137,7 +132,6 @@ a:focus {
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* On Hover */
 .back-to-top:hover {
   background: rgba(0, 255, 229, 0.2);
   box-shadow: 0 6px 30px rgba(0, 255, 229, 0.3);
@@ -149,23 +143,91 @@ a:focus {
   transform: scale(1.2);
 }
 
-/* On Scroll */
 .back-to-top.show {
   display: flex;
 }
 
 /* -------------------- BACK TO THE TOP RESPONSIVENESS SECTION CSS -------------------- */
 
-@media (max-width: 480px) {
+@media (max-width: 1440px) {
   .back-to-top {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    right: 0px;
-    bottom: 10px;
+    width: 48px;
+    height: 48px;
+    font-size: 21px;
+    bottom: 20px;
+    right: 20px;
   }
 }
 
+@media (max-width: 1200px) {
+  .back-to-top {
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+    bottom: 18px;
+    right: 18px;
+  }
+}
+
+@media (max-width: 992px) {
+  .back-to-top {
+    width: 44px;
+    height: 44px;
+    font-size: 19px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    bottom: 14px;
+    right: 14px; /* Fix: prevent sudden shift */
+  }
+}
+
+@media (max-width: 580px) {
+  .back-to-top {
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
+    bottom: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-to-top {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .back-to-top {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+@media (max-width: 320px) {
+  .back-to-top {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    bottom: 6px;
+    right: 6px;
+  }
+}
 /* -------------------- END SECTION CSS -------------------- */
 
 /* -------------------- NAVBAR SECTION CSS -------------------- */
@@ -422,10 +484,10 @@ a:focus {
 /* -------------------- NAVBAR TOGGLEER SECTION CSS -------------------- */
 
 .custom-toggler {
-  background: rgba(0, 255, 255, 0.1);
+  background: rgba(0, 255, 255, 0.08);
   border: 1px solid #00ffff;
-  border-radius: 8px;
-  padding: 8px 12px;
+  border-radius: 10px;
+  padding: 10px 16px;
   font-size: 24px;
   color: #00ffff;
   transition: all 0.3s ease;
@@ -434,26 +496,81 @@ a:focus {
   justify-content: center;
   line-height: 1;
   cursor: pointer;
-}
-
-.custom-toggler:hover {
-  background: rgba(0, 255, 255, 0.2);
-  color: #ffffff;
-  box-shadow: 0 0 5px #00ffff88;
+  box-shadow: 0 0 0 transparent;
 }
 
 @media (hover: hover) {
   .custom-toggler:hover {
     background: rgba(0, 255, 255, 0.2);
     color: #ffffff;
-    box-shadow: 0 0 5px #00ffff88;
+    box-shadow: 0 0 8px #00ffff88, 0 0 16px #00ffff44;
+    transform: scale(1.05);
+  }
+}
+
+.custom-toggler:focus,
+.custom-toggler:active {
+  outline: none;
+  background: rgba(0, 255, 255, 0.25);
+  box-shadow: 0 0 10px #00ffffaa, 0 0 20px #00ffff66;
+  color: #fff;
+}
+
+/* -------------------- NAVBAR TOGGLEER RESPONSIVE SECTION CSS -------------------- */
+
+
+@media (max-width: 1200px) {
+  .custom-toggler {
+    padding: 10px 16px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 992px) {
+  .custom-toggler {
+    padding: 10px 14px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-toggler {
+    padding: 10px 14px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 580px) {
+  .custom-toggler {
+    padding: 12px 16px;
+    font-size: 18px;
   }
 }
 
 @media (max-width: 480px) {
   .custom-toggler {
+    padding: 12px 18px;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 375px) {
+  .custom-toggler {
     padding: 10px 14px;
-    font-size: 28px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 320px) {
+  .custom-toggler {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+}
+@media (max-width: 280px) {
+  .custom-toggler {
+    padding: 8px 10px;
+    font-size: 14px;
   }
 }
 
@@ -3406,8 +3523,8 @@ a:focus {
   }
 
   .filter-btn {
-    width: 150px;
-    height: 45px;
+    width: 160px;
+    height: 44px;
     font-size: 12.5px;
   }
 }
@@ -3418,15 +3535,16 @@ a:focus {
   }
 
   .filter-btn {
-    width: 140px;
+    width: 180px;
     height: 42px;
     font-size: 12px;
+    
   }
 }
 
 @media (max-width: 480px) {
   .filter-btn {
-    width: 130px;
+    width: 160px;
     height: 40px;
     font-size: 11px;
   }
@@ -3434,7 +3552,7 @@ a:focus {
 
 @media (max-width: 375px) {
   .filter-btn {
-    width: 120px;
+    width: 140px;
     height: 38px;
     font-size: 10px;
   }
@@ -3442,72 +3560,93 @@ a:focus {
 
 @media (max-width: 320px) {
   .filter-btn {
-    width: 110px;
+    width: 120px;
     height: 36px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 280px) {
+  .filter-btn {
+    width: 100px;
+    height: 34px;
     font-size: 8px;
   }
 }
 
-/* === Portfolio Card === */
+
 .portfolio-wrap {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transition: transform 0.35s ease;
   background-color: #111;
   margin-bottom: 21px;
 }
 
-.portfolio-wrap:hover {
-  transform: scale(1.02);
-}
-
-/* Portfolio Image */
-
 .portfolio-wrap img {
   width: 100%;
-  height: 200px; /* fixed height for all images */
+  height: 200px;
   object-fit: cover;
   border-radius: 20px 20px 0 0;
-  transition: transform 0.3s ease;
-}
-.portfolio-wrap:hover img {
-  transform: scale(1.05);
 }
 
-/* === Info Overlay === */
 .portfolio-info {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.37); /* Start transparent */
+  backdrop-filter: blur(4px) saturate(100%);
+  -webkit-backdrop-filter: blur(5px) saturate(100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   color: #fff;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  padding: 20px;
+ 
+  padding: 25px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
+
+  transition:
+    backdrop-filter 0.5s ease,
+    background 0.5s ease;
 }
 
 .portfolio-wrap:hover .portfolio-info {
-  opacity: 1;
+  background: rgba(15, 15, 15, 0.466);
+  backdrop-filter: blur(0px) saturate(160%);
+  -webkit-backdrop-filter: blur(0px) saturate(160%);
 }
 
 .portfolio-info h4 {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   margin-bottom: 6px;
-  color: #00ffff;
+  background: linear-gradient(135deg, #00c9ff, #92fe9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .portfolio-info p {
   font-size: 14px;
-  color: #ccc;
-  margin-bottom: 16px;
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.portfolio-info::after {
+  content: "";
+  position: absolute;
+  bottom: 16px;
+  left: 30%;
+  right: 30%;
+  height: 3px;
+  background: linear-gradient(135deg, #00c9ff, #92fe9d);
+  border-radius: 2px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: none;
 }
 
 /* === Button Group === */
@@ -4264,52 +4403,121 @@ a:focus {
 
 /* -------------------- CONTACT RESPONSIVENESS SECTION CSS -------------------- */
 
+/* 1440px and below */
 @media (max-width: 1440px) {
-  .section-header h2 { font-size: 34px; }
+  .section-header h2 {
+    font-size: 34px;
+  }
 }
 
+/* 1200px and below */
 @media (max-width: 1200px) {
-  .section-header h2 { font-size: 32px; }
-  .contact-form-modern { padding: 35px; }
+  .contact-form-modern {
+    padding: 35px;
+  }
 }
 
+/* 992px and below */
 @media (max-width: 992px) {
-  .section-header h2 { font-size: 30px; }
-  .section-header p { font-size: 17px; }
-  .contact-form-modern { padding: 30px; }
-}
-
-@media (max-width: 768px) {
-  .section-header h2 { font-size: 28px; }
-  .section-header p { font-size: 16px; }
-  .contact-form-modern { padding: 25px 20px; }
-}
-
-@media (max-width: 580px) {
-  .section-header h2 { font-size: 26px; }
-  .contact-form-modern { padding: 20px; }
-  .contact-btn { font-size: 15px; }
-}
-
-@media (max-width: 480px) {
-  .section-header h2 { font-size: 24px; }
-  .section-header p { font-size: 15px; }
+  .section-header h2 {
+    font-size: 32px;
+  }
+  .contact-form-modern {
+    padding: 30px;
+  }
   .input-group input,
   .input-group textarea {
     font-size: 15px;
   }
 }
 
-@media (max-width: 375px) {
-  .section-header h2 { font-size: 22px; }
-  .contact-btn { font-size: 14px; }
+/* 768px and below */
+@media (max-width: 768px) {
+  #contactForm.contact-form-modern {
+    padding: 28px;
+  }
+  .input-group label {
+    font-size: 0.95rem;
+  }
+  .input-group input,
+  .input-group textarea {
+    font-size: 15px;
+    padding: 10px 14px;
+  }
 }
 
+/* ≤ 580px */
+@media (max-width: 580px) {
+  #contactForm.contact-form-modern {
+    padding: 22px;
+    gap: 18px;
+  }
+  .input-group label {
+    font-size: 0.9rem;
+  }
+  .input-group input,
+  .input-group textarea {
+    font-size: 14.5px;
+    padding: 10px 12px;
+  }
+}
+
+/* ≤ 480px */
+@media (max-width: 480px) {
+  #contactForm.contact-form-modern {
+    padding: 20px;
+    gap: 16px;
+  }
+  .input-group input,
+  .input-group textarea {
+    font-size: 14px;
+    padding: 9px 12px;
+  }
+  .input-group label {
+    font-size: 0.9rem;
+  }
+}
+
+/* ≤ 375px */
+@media (max-width: 375px) {
+  #contactForm.contact-form-modern {
+    padding: 18px;
+  }
+  .input-group input,
+  .input-group textarea {
+    font-size: 13.5px;
+  }
+}
+
+/* ≤ 320px */
 @media (max-width: 320px) {
-  .section-header h2 { font-size: 20px; }
-  .contact-form-modern { padding: 15px; }
-  .contact-btn { font-size: 13px; }
-  #formMessage { font-size: 12.5px; }
+  .input-group label {
+    font-size: 0.85rem;
+  }
+  .input-group input,
+  .input-group textarea {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+}
+
+/* **≤ 240px — ultra‑small screens** */
+@media (max-width: 240px) {
+  .section-header h2 {
+    font-size: 28px; 
+  }
+  #contactForm.contact-form-modern {
+    padding: 12px; 
+    gap: 8px;
+  }
+  .input-group label {
+    font-size: 0.75rem;
+  }
+  .input-group input,
+  .input-group textarea {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
 }
 
 /* -------------------- END SECTION CSS -------------------- */
