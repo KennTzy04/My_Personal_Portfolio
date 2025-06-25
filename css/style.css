@@ -42,25 +42,27 @@ body.dark-mode {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #0f172a; /* Or transparent if needed */
+  background: #0f172a;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .hacker-loader {
   position: relative;
-  width: 24em;
-  height: 6em;
+  width: 90%;
+  max-width: 400px;
+  height: auto;
   background-color: #0a0a0a;
   border: 0.2em solid #00bfa6;
   border-radius: 0.5em;
-  padding: 1em;
+  padding: 1.5em 1em;
   overflow: hidden;
   box-shadow: 0 0 1em rgba(0, 255, 0, 0.3);
 }
-
 .loader-text {
   text-align: center;
   margin-bottom: 1em;
@@ -69,9 +71,10 @@ body.dark-mode {
 .text-glitch {
   color: #00bfa6;
   font-family: monospace;
-  font-size: 1.5em;
+  font-size: 1.2rem;
   position: relative;
   display: inline-block;
+  word-break: break-word;
 }
 
 .text-glitch::before,
@@ -280,7 +283,21 @@ body.dark-mode {
     transform: translate(2em, 2em);
   }
 }
+/* -------------------- LOADER RESPONSIVE SECTION CSS -------------------- */
 
+@media (max-width: 480px) {
+  .text-glitch {
+    font-size: 1rem;
+  }
+
+  .hacker-loader {
+    padding: 1em 0.5em;
+  }
+
+  .loader-bar {
+    height: 0.4em;
+  }
+}
 
 /* -------------------- END SECTION CSS -------------------- */
 
@@ -2775,7 +2792,6 @@ body.dark-mode {
   color: #fff;
 }
 
-/* change border right to left 3px solid */
 .experience .timeline .timeline-item.right .timeline-text {
   border-left: none;
   border-left: 3px solid #00ffff;

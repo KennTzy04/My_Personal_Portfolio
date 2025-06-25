@@ -33,7 +33,7 @@
           navbar.style.maxHeight = "0";
         }
       } else {
-        navbar.style.maxHeight = "1000px"; // ensure visibility on desktop
+        navbar.style.maxHeight = "1000px";
       }
     }
 
