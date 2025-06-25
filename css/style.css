@@ -4943,7 +4943,7 @@ button:focus .loader {
   color: #ffffff;
 }
 
-/* Copyright */
+/* -------------------- FOOTER COPYRIGHT SECTION CSS -------------------- */
 .footer .copyright {
   font-size: 14px;
   line-height: 1.5;
@@ -4968,6 +4968,27 @@ button:focus .loader {
   text-decoration: underline;
 }
 
+/* -------------------- FOOTER COPYRIGHT RESPONSIVENESS SECTION CSS -------------------- */
+
+@media (max-width: 768px) {
+  .footer .copyright {
+    font-size: 13px;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer .copyright {
+    font-size: 12px;
+    padding: 0 20px;
+    line-height: 1.6;
+  }
+
+  .footer .copyright a {
+    display: inline-block;
+    word-break: break-word;
+  }
+}
 /* -------------------- FOOTER RESPONSIVENESS SECTION CSS -------------------- */
 
 @media (max-width: 768px) {
@@ -5229,13 +5250,16 @@ button:focus .loader {
 /* -------------------- SOCIAL MEDIA ICONS SECTION CSS -------------------- */
 
 .wrapper {
-  display: inline-flex;
+  display: flex;
   list-style: none;
   height: 120px;
   width: 100%;
   padding-top: 40px;
   font-family: "Poppins", sans-serif;
   justify-content: center;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .wrapper .icon {
