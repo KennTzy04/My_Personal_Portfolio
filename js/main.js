@@ -19,7 +19,6 @@
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
-
   // -------------------- NAVBAR MOBILE MOOD -------------------- //
 
   document.addEventListener("DOMContentLoaded", function () {
