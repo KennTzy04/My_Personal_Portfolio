@@ -4954,53 +4954,151 @@ button:focus .loader {
 
 /* -------------------- FOOTER RESPONSIVENESS SECTION CSS -------------------- */
 
-@media (max-width: 768px) {
-  .footer {
-    padding: 40px 15px 10px;
-  }
-
-  .footer .footer-menu a {
-    font-size: 13px;
-  }
-
-  .footer .footer-social a {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
+@media (max-width: 1440px) {
+  .footer .icon {
+    width: 48px;
+    height: 48px;
+    font-size: 17px;
   }
 }
 
-@media (max-width: 480px) {
-  .footer .footer-menu {
-    gap: 8px;
+/* 1200px and below */
+@media (max-width: 1200px) {
+  .footer .icon {
+    width: 46px;
+    height: 46px;
+    font-size: 16px;
+    margin: 8px;
   }
 
-  .footer .footer-menu a:not(:last-child)::after {
-    content: "|";
-    margin-left: 15px;
-    color: #ffffff;
+  .footer .footer-text {
+    font-size: 13.5px;
+  }
+}
+
+/* 992px and below */
+@media (max-width: 992px) {
+  .footer .wrapper {
+    gap: 5px;
   }
 
-  .footer .footer-social a {
-    width: 34px;
-    height: 34px;
+  .footer .icon {
+    width: 44px;
+    height: 44px;
     font-size: 15px;
   }
+}
 
+/* 768px and below (tablet) */
+@media (max-width: 768px) {
   .footer {
-    padding: 30px 10px 10px;
+    padding: 25px 15px 15px;
+  }
+
+  .footer .icon {
+    width: 42px;
+    height: 42px;
+    font-size: 14px;
+    margin: 6px;
+  }
+
+  .footer .tooltip {
+    font-size: 11px;
+    top: -30px;
+  }
+
+  .footer .footer-text {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+}
+
+/* 580px and below */
+@media (max-width: 580px) {
+  .footer .icon {
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .footer .tooltip {
+    font-size: 10px;
+  }
+}
+
+/* 480px and below (phones) */
+@media (max-width: 480px) {
+  .footer {
+    padding: 20px 10px 10px;
+  }
+
+  .footer .icon {
+    width: 38px;
+    height: 38px;
+    font-size: 13px;
+    margin: 5px;
+  }
+
+  .footer .tooltip {
+    top: -28px;
+    font-size: 10px;
+  }
+
+  .footer .footer-text {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+}
+
+/* 375px and below */
+@media (max-width: 375px) {
+  .footer .icon {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .footer .tooltip {
+    top: -25px;
+    font-size: 10px;
+  }
+
+  .footer .footer-text {
+    font-size: 11.5px;
+  }
+}
+
+/* 320px and below */
+@media (max-width: 320px) {
+  .footer .icon {
+    width: 34px;
+    height: 34px;
+    font-size: 11px;
+    margin: 4px;
+  }
+
+  .footer .tooltip {
+    font-size: 9.5px;
+    top: -22px;
+  }
+
+  .footer .footer-text {
+    font-size: 11px;
+    padding: 0 6px;
   }
 }
 
 /* -------------------- FOOTER COPYRIGHT SECTION CSS -------------------- */
 
-.footer-container {
+.footer-container-copyright {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
-  display: center;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  flex-wrap: center;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .footer-text {
@@ -5023,32 +5121,51 @@ button:focus .loader {
   text-decoration: underline;
 }
 
-@media (max-width: 480px) {
-  .footer-text {
-    font-size: 13px;
-    padding: 0 15px;
-  }
-}
-
 /* -------------------- FOOTER COPYRIGHT RESPONSIVENESS SECTION CSS -------------------- */
 
-@media (max-width: 768px) {
-  .footer .copyright {
+@media (max-width: 1200px) {
+  .footer-text {
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 992px) {
+  .footer-container-copyright {
+    padding: 0 10px;
+  }
+
+  .footer-text {
     font-size: 13px;
-    padding: 0 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container-copyright {
+    flex-direction: column;
+    padding: 0 10px;
+  }
+
+  .footer-text {
+    font-size: 12.5px;
   }
 }
 
 @media (max-width: 480px) {
-  .footer .copyright {
+  .footer-text {
     font-size: 12px;
-    padding: 0 20px;
-    line-height: 1.6;
+    padding: 0 5px;
   }
+}
 
-  .footer .copyright a {
-    display: inline-block;
-    word-break: break-word;
+@media (max-width: 375px) {
+  .footer-text {
+    font-size: 11.5px;
+  }
+}
+
+@media (max-width: 320px) {
+  .footer-text {
+    font-size: 11px;
   }
 }
 
