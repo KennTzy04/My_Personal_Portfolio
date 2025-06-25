@@ -31,53 +31,97 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.17/js/utils.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/css/intlTelInput.css" />
 
-
+        
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
   </head>
+<body>
 
-  <body>
+    <!-- LOADER START -->
+    <div id="loader" class="show">
+        <div class="loader">
+          <i class="fas fa-code"></i>
+        </div>
+    </div>
+    <!-- LOADER END -->
+
+
     
     <!-- NAVBAR START -->
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-      <div class="container-fluid">
-        <a href="index.html" class="navbar-brand d-flex align-items-center">
-          <img
-            src="img/my svg icons/MAIN LOGO.svg"
-            alt="Logo"
-            class="navbar-logo me-2"
-          />
-          <span class="navbar-brand-text">Kenneth Casing</span>
-        </a>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
+        <div class="container-fluid justify-content-between align-items-center">
 
-        <button
-          class="navbar-toggler custom-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-          aria-label="Toggle navigation"
-        >
-          <i class="fas fa-bars"></i>
-        </button>
+          <!-- Logo Left -->
+          <a class="navbar-brand d-flex align-items-center" href="#home">
+            <img src="img/my svg icons/MAIN LOGO.svg" alt="Logo" class="navbar-logo me-2" />
+            <span>Kenneth Casing</span>
+          </a>
 
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarCollapse"
-        >
-          <div class="navbar-nav">
-            <a href="#home" class="nav-item nav-link active">Home</a>
-            <a href="#about" class="nav-item nav-link">About</a>
-            <a href="#service" class="nav-item nav-link">Service</a>
-            <a href="#experience" class="nav-item nav-link">Educ & Exp</a>
-            <a href="#skills" class="nav-item nav-link">Skills</a>
-            <a href="#portfolio" class="nav-item nav-link">Portfolio</a>
-            <a href="#contact" class="nav-item nav-link">Contact</a>
+         <input type="checkbox" id="checkbox">
+          <label for="checkbox" class="toggle">
+              <div class="bars" id="bar1"></div>
+              <div class="bars" id="bar2"></div>
+              <div class="bars" id="bar3"></div>
+          </label>
+
+          <!-- Navigation Links Centered -->
+          <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+            <ul class="navbar-nav gap-3">
+              <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="#service">Service</a></li>
+              <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+              <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+              <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+              <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+              <!-- Dark Mode Toggle Switch -->
+              <label for="switch" class="toggledark">
+                <input type="checkbox" class="input" id="switch" />
+                <div class="icon icon--moon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+
+                <div class="icon icon--sun">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"
+                    ></path>
+                  </svg>
+                </div>
+              </label>
+
+            </ul>
           </div>
+
+          <!-- CTA Button Right -->
+          <div class="d-none d-lg-block">
+            <a href="#contact" class="btn btn-outline-light px-4 rounded-pill fw-semibold">Contact Me</a>
+          </div>
+          
+         
         </div>
       </div>
     </nav>
     <!-- NAVBAR END -->
-     
+  
     <!-- HERO SECTION START -->
     <section class="hero" id="home">
       <div class="container-fluid">
@@ -116,38 +160,39 @@
 
               <!-- Social Links -->
               <div class="hero-social">
-                <a
-                  href="https://www.facebook.com/kennethcasing04"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                >
-                  <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a
-                  href="https://www.instagram.com/_knth.c/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                >
-                  <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/kenncasing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                >
-                  <i class="fa-brands fa-linkedin-in"></i>
-                </a>
-                <a
-                  href="https://x.com/KennethCasing1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Twitter/X"
-                >
-                  <i class="fa-brands fa-x-twitter"></i>
-                </a>
+                <ul class="wrapper">
+                  <!-- Facebook -->
+                  <a href="https://facebook.com" target="_blank" rel="noopener">
+                    <li class="icon facebook">
+                      <span class="tooltip">Facebook</span>
+                      <i class="fab fa-facebook-f"></i>
+                    </li>
+                  </a>
+
+                  <!-- Instagram -->
+                  <a href="https://instagram.com" target="_blank" rel="noopener">
+                    <li class="icon instagram">
+                      <span class="tooltip">Instagram</span>
+                      <i class="fab fa-instagram"></i>
+                    </li>
+                  </a>
+
+                  <!-- LinkedIn -->
+                  <a href="https://linkedin.com" target="_blank" rel="noopener">
+                    <li class="icon linked">
+                      <span class="tooltip">LinkedIn</span>
+                      <i class="fab fa-linkedin"></i>
+                    </li>
+                  </a>
+
+                  <!-- GitHub -->
+                  <a href="https://github.com" target="_blank" rel="noopener">
+                    <li class="icon github">
+                      <span class="tooltip">GitHub</span>
+                      <i class="fab fa-github"></i>
+                    </li>
+                  </a>
+                </ul>
               </div>
             </div>
           </div>
@@ -321,8 +366,8 @@
                 <div class="service-text">
                   <h3>Editing</h3>
                   <p>
-                    Professional video and photo editing services to create compelling
-                    visual content.
+                    Professional video and photo editing services to create compelling visual content.
+                    We turn raw footage and images into polished media that tells your story effectively.
                   </p>
                 </div>
               </div>
@@ -1162,7 +1207,13 @@
                       border-radius: 6px; font-weight: 500; transition: all 0.3s ease;">
           </div>
     
-          <button type="submit" class="contact-btn">Send Message</button>
+         <button type="submit" class="contact-btn animated-submit">
+          <span class="txt">Submit</span>
+          <span class="txt2">Sent!</span>
+          <span class="loader-container">
+            <span class="loader"></span>
+          </span>
+        </button>
         </form>
       </div>
     </section>
@@ -1171,21 +1222,56 @@
 
     <!-- FOOTER SECTION START -->
     <footer class="footer">
-        <div class="footer-social">
-            <a href="https://www.facebook.com/kennethcasing04" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://www.instagram.com/_knth.c/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/kenncasing" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://x.com/KennethCasing1" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
-        </div>
+       <ul class="wrapper">
+          <!-- Facebook -->
+          <a href="https://facebook.com" target="_blank" rel="noopener">
+            <li class="icon facebook">
+              <span class="tooltip">Facebook</span>
+              <i class="fab fa-facebook-f"></i>
+            </li>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://instagram.com" target="_blank" rel="noopener">
+            <li class="icon instagram">
+              <span class="tooltip">Instagram</span>
+              <i class="fab fa-instagram"></i>
+            </li>
+          </a>
+
+           <!-- LinkedIn -->
+          <a href="https://linkedin.com" target="_blank" rel="noopener">
+            <li class="icon linked">
+              <span class="tooltip">LinkedIn</span>
+              <i class="fab fa-linkedin"></i>
+            </li>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com" target="_blank" rel="noopener">
+            <li class="icon github">
+              <span class="tooltip">GitHub</span>
+              <i class="fab fa-github"></i>
+            </li>
+          </a>
+        </ul>
         
         <div class="copyright">
             <p>© <strong>Kenneth Casing</strong>. All Rights Reserved.</p>
         </div>
     </footer>
+    
     <!-- FOOTER SECTION END -->
 
-    <!-- BACK TO TOP -->
-    <a href="#" class="btn back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- BACK TO TOP SECTION END -->
+
+    <button class="buttonback" id="backToTop" title="Back to Top">
+      <svg class="svgIcon" viewBox="0 0 384 512">
+        <path
+          d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+        ></path>
+      </svg>
+    </button>
 
     <!-- PRELOADER -->
     <div id="loader" class="show">
@@ -1194,7 +1280,11 @@
         </div>
     </div>
     
-    <div id="particles-js" class="overlay"></div>
+    
+    <div id="particles-js"></div>
+
+    <script src="../particles.js"></script>
+    <script src="js/app.js"></script>
 
     <!-- PARTICLES JS LIBRARY -->
     <script src="js/particles.min.js"></script>
@@ -1217,7 +1307,8 @@
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/intlTelInput.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/utils.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
     <!-- CONTACT FORM VALIDATION SCRIPT -->
     <script src="mail/contact.js"></script>
     

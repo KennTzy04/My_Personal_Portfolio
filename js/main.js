@@ -15,6 +15,60 @@
   };
   loader();
 
+  // -------------------- NAVBAR MOBILE MOOD -------------------- //
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkbox = document.getElementById("checkbox");
+    const navbar = document.getElementById("mainNavbar");
+
+    function toggleNavbar() {
+      if (window.innerWidth <= 991) {
+        // Bootstrap mobile breakpoint
+        if (checkbox.checked) {
+          navbar.classList.add("show");
+        } else {
+          navbar.classList.remove("show");
+        }
+      } else {
+        navbar.classList.add("show"); // Always show on desktop
+      }
+    }
+
+    // Toggle when checkbox changes
+    checkbox.addEventListener("change", toggleNavbar);
+
+    // Update on window resize (for responsiveness)
+    window.addEventListener("resize", toggleNavbar);
+
+    // Initial check
+    toggleNavbar();
+  });
+
+  // -------------------- DARK MODE -------------------- //
+
+  const switchToggle = document.getElementById("switch");
+  const body = document.body;
+
+  // Apply saved theme on load
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      body.classList.add("dark-mode");
+      switchToggle.checked = true;
+    }
+  });
+
+  // Toggle dark mode on switch
+  switchToggle.addEventListener("change", () => {
+    if (switchToggle.checked) {
+      body.classList.add("dark-mode");
+      localStorage.setItem("theme", "dark");
+    } else {
+      body.classList.remove("dark-mode");
+      localStorage.setItem("theme", "light");
+    }
+  });
+
   // -------------------- RELOAD GO TO HOME PAGE -------------------- //
 
   window.addEventListener("DOMContentLoaded", () => {
@@ -33,16 +87,26 @@
 
   // -------------------- BACK TO TOP -------------------- //
 
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 200) {
-      $(".back-to-top").fadeIn("slow");
+  const backToTopBtn = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    // Show only if the user is near the bottom (e.g., within 200px of the bottom)
+    if (scrollTop + windowHeight >= documentHeight - 200) {
+      backToTopBtn.style.display = "flex";
     } else {
-      $(".back-to-top").fadeOut("slow");
+      backToTopBtn.style.display = "none";
     }
   });
-  $(".back-to-top").click(function () {
-    $("html, body").animate({ scrollTop: 0 }, 1500, "easeInOutExpo");
-    return false;
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   });
 
   // -------------------- INTERACTION TO ALLOW SCROLL ON MOBILE -------------------- //
@@ -114,7 +178,6 @@
     }
   });
 
-
   // -------------------- SMOOTH SCROLLING ON THE NAVBAR LINKS AND CLOSE MOBILE MENU WHEN CLICKED -------------------- //
 
   $(".navbar-nav a").on("click", function (event) {
@@ -146,9 +209,8 @@
       $(".navbar-collapse").collapse("hide");
     }
   });
- 
-  // -------------------- TYPED INITIATE -------------------- //
 
+  // -------------------- TYPED INITIATE -------------------- //
 
   $(document).ready(function () {
     if ($(".typed-text-output").length == 1) {
@@ -230,13 +292,13 @@
           },
         },
         color: {
-          value: "#ffffff",
+          value: "#FFFFFF",
         },
         shape: {
           type: "circle",
           stroke: {
             width: 0,
-            color: "#000000",
+            color: "#FFFFFF",
           },
         },
         opacity: {
@@ -388,7 +450,7 @@
   });
 
   // -------------------- JAVASCRIPT (DISABLE AND RE-ENABLE) -------------------- //
-  
+
   const viewBtn = document.getElementById("viewBtn");
   const liveDemoBtn = document.getElementById("liveDemoBtn");
   const modal = document.getElementById("modal3");
@@ -419,4 +481,25 @@
       setDisabled(false);
     }
   });
+
+  // -------------------- NAVBAR HIDE ON SCROLL -------------------- //
+
+  let lastScrollTop = 0;
+  const navbar = document.querySelector(".navbar");
+
+  window.addEventListener("scroll", function () {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+      // Scrolling down
+      navbar.style.top = "-100px"; // hide navbar
+    } else {
+      // Scrolling up
+      navbar.style.top = "0";
+    }
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
+  });
+
+  // -------------------- END OF SCRIPT -------------------- //
 })(jQuery);

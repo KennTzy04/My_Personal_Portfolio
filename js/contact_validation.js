@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
           sentMessage.style.display = "block";
           setTimeout(() => {
             sentMessage.style.display = "none";
-          }, 5000);
+          }, 9000);
         }
 
         // Display `#formMessage` if exists
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           setTimeout(() => {
             messageBox.style.display = "none";
-          }, 5000);
+          }, 9000);
         }
 
         form.reset();
