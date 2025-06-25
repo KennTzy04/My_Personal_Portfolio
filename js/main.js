@@ -27,24 +27,18 @@
 
     function toggleNavbar() {
       if (window.innerWidth <= 991) {
-        // Bootstrap mobile breakpoint
         if (checkbox.checked) {
-          navbar.classList.add("show");
+          navbar.style.maxHeight = "500px";
         } else {
-          navbar.classList.remove("show");
+          navbar.style.maxHeight = "0";
         }
       } else {
-        navbar.classList.add("show"); // Always show on desktop
+        navbar.style.maxHeight = "1000px"; // ensure visibility on desktop
       }
     }
 
-    // Toggle when checkbox changes
     checkbox.addEventListener("change", toggleNavbar);
-
-    // Update on window resize (for responsiveness)
     window.addEventListener("resize", toggleNavbar);
-
-    // Initial check
     toggleNavbar();
   });
 
@@ -117,28 +111,40 @@
 
   let currentSection = null;
 
+  // Setup observer
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         const section = entry.target;
-        const inCenter = entry.isIntersecting && entry.intersectionRatio > 0.6;
 
-        if (inCenter) {
-          // Remove active from others
-          document.querySelectorAll("[data-section]").forEach((sec) => {
-            sec.classList.remove("active-focus");
-            sec.dataset.focusable = "false";
-          });
+        // Check if the section is intersecting at more than 60%
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          // Only update if the section changed
+          if (currentSection !== section) {
+            // Remove active state from all
+            document.querySelectorAll("[data-section]").forEach((sec) => {
+              sec.classList.remove("active-focus");
+              sec.dataset.focusable = "false";
+            });
 
-          // Activate current
-          section.classList.add("active-focus");
-          section.dataset.focusable = "true";
-          currentSection = section;
+            // Add active state to current section
+            section.classList.add("active-focus");
+            section.dataset.focusable = "true";
+            currentSection = section;
+          }
         }
       });
     },
-    { threshold: 0.6 }
+    {
+      threshold: [0.6], // using array to improve clarity
+      rootMargin: "0px 0px -20% 0px", // optional: helps with early triggering
+    }
   );
+
+  // Attach observer to all target sections
+  document.querySelectorAll("[data-section]").forEach((section) => {
+    observer.observe(section);
+  });
 
   // Observe all sections
   document.querySelectorAll("[data-section]").forEach((section) => {
@@ -172,48 +178,6 @@
     }
   }
 
-  // -------------------- STICKY NAVBAR -------------------- //
-
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 0) {
-      $(".navbar").addClass("nav-sticky");
-    } else {
-      $(".navbar").removeClass("nav-sticky");
-    }
-  });
-
-  // -------------------- SMOOTH SCROLLING ON THE NAVBAR LINKS AND CLOSE MOBILE MENU WHEN CLICKED -------------------- //
-
-  $(".navbar-nav a").on("click", function (event) {
-    if (this.hash !== "") {
-      event.preventDefault();
-
-      //-----CLOSE MOBILE MENU-----//
-      $(".navbar-collapse").collapse("hide");
-
-      $("html, body").animate(
-        {
-          scrollTop: $(this.hash).offset().top - 45,
-        },
-        1500,
-        "easeInOutExpo"
-      );
-
-      if ($(this).parents(".navbar-nav").length) {
-        $(".navbar-nav .active").removeClass("active");
-        $(this).closest("a").addClass("active");
-      }
-    }
-  });
-
-  // -------------------- CLOSE MOBILE MENU WHEN CLICKING OUTSIDE -------------------- //
-
-  $(document).click(function (event) {
-    if (!$(event.target).closest(".navbar").length) {
-      $(".navbar-collapse").collapse("hide");
-    }
-  });
-
   // -------------------- TYPED INITIATE -------------------- //
 
   $(document).ready(function () {
@@ -229,24 +193,20 @@
     }
   });
 
-  // -------------------- SKILLS SECTION -------------------- //
-
-  $(".skills").waypoint(
-    function () {
-      $(".progress .progress-bar").each(function () {
-        $(this).css("width", $(this).attr("aria-valuenow") + "%");
-      });
-    },
-    { offset: "80%" }
-  );
-
   // -------------------- PRELOADER -------------------- //
 
-  $(window).on("load", function () {
-    if ($("#loader").length) {
-      $("#loader").fadeOut("slow", function () {
-        $(this).remove();
-      });
+  window.addEventListener("load", () => {
+    const loaderWrapper = document.getElementById("loader");
+
+    if (loaderWrapper) {
+      loaderWrapper.style.transition = "opacity 0.6s ease";
+      loaderWrapper.style.opacity = "0";
+      loaderWrapper.style.pointerEvents = "none";
+
+      // Optional: remove from DOM after fade-out
+      setTimeout(() => {
+        loaderWrapper.remove();
+      }, 700); // slightly longer than the transition
     }
   });
 
@@ -274,17 +234,7 @@
     );
   });
 
-  // -------------------- NAVBAR DROPDOWN SECTION -------------------- //
-
-  window.addEventListener("scroll", function () {
-    const navbar = document.querySelector(".navbar");
-    if (window.scrollY > 50) {
-      navbar.classList.add("nav-sticky");
-    } else {
-      navbar.classList.remove("nav-sticky");
-    }
-  });
-
+  // -------------------- PARTICLES JS -------------------- //
   document.addEventListener("DOMContentLoaded", function () {
     particlesJS("particles-js", {
       particles: {
@@ -399,13 +349,7 @@
       });
     });
 
-    // -------------------- LISTEN FOR SCROLL -------------------- //
-
     window.addEventListener("scroll", onScroll);
-
-    // -------------------- TRIGGER ON PAGE RELOAD -------------------- //
-
-    onScroll();
   });
 
   // -------------------- INITIALIZE LIGHTBOX -------------------- //

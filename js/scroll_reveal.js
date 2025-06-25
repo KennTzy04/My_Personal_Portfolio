@@ -190,35 +190,6 @@ sr.reveal(".service .service-text", {
   interval: 150
 });
 
-/* --------------------  EDUCATION & EXPERIENCE SECTION REVEAL -------------------- */
-
-sr.reveal(".experience .timeline", {
-  origin: "top",
-  delay: 100,
-  opacity: 0
-});
-
-sr.reveal(".experience .timeline-item.left", {
-  origin: "left",
-  delay: 200,
-  interval: 200,
-  opacity: 0
-});
-
-sr.reveal(".experience .timeline-item.right", {
-  origin: "right",
-  delay: 200,
-  interval: 200,
-  opacity: 0
-});
-
-sr.reveal(".experience .timeline-text", {
-  origin: "bottom",
-  delay: 300,
-  interval: 200,
-  opacity: 0
-});
-
 
 /* --------------------  CERTIFICATES SECTION REVEAL -------------------- */
 
