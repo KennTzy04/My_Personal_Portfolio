@@ -13,7 +13,16 @@ const sr = ScrollReveal({
 
 /* --------------------  NAVBAR SECTION REVEAL -------------------- */
 
-
+  sr.reveal('.custom-navbar', {
+    origin: 'top',
+    distance: '40px',
+    duration: 1000,
+    delay: 200,
+    easing: 'ease-in-out',
+    reset: false, // set to true if you want it to animate again when re-scrolling
+    opacity: 0,
+    scale: 1,
+  });
 
 /* --------------------  HEADER SECTION REVEAL -------------------- */
 
