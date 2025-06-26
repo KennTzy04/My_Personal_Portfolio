@@ -4826,6 +4826,104 @@ body.dark-mode {
 
 /* -------------------- END SECTION CSS -------------------- */
 
+/* -------------------- TESTIMONIAL SECTION CSS -------------------- */
+
+
+.testimonial-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  height: 350px;
+} 
+
+.testimonial-glass:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 255, 255, 0.3);
+}
+
+/* === Avatar & Quote === */
+.testimonial-avatar {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
+  display: block;
+  margin: 0 auto;
+}
+
+.testimonial-avatar-wrapper {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #00ffff;
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
+}
+
+.quote-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 32px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* === Testimonial Text === */
+.testimonial-text {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #eee;
+  margin-bottom: 1rem;
+}
+
+/* === Stars === */
+.stars i {
+  font-size: 18px;
+}
+
+/* === Owl Carousel Nav Override (Optional) === */
+.testimonial-carousel .owl-dots {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.testimonial-carousel .owl-dot {
+  width: 14px;
+  height: 14px;
+  margin: 0 6px;
+  background-color: transparent;
+  border: 2px solid #00ffff;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.testimonial-carousel .owl-dot:hover {
+  background-color: rgba(0, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.testimonial-carousel .owl-dot.active {
+  background-color: #00ffff;
+}
+
+/* === Responsive === */
+@media (max-width: 576px) {
+  .testimonial-glass {
+    padding: 1.5rem;
+  }
+  .testimonial-text {
+    font-size: 1rem;
+  }
+}
 /* -------------------- CONTACT SECTION CSS -------------------- */
 
 .contact-section {

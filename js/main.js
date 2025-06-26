@@ -67,6 +67,21 @@
     }
   });
 
+  // -------------------- Owl Carousel Init for Testimonial -------------------- //
+
+  $(".testimonial-carousel").owlCarousel({
+    autoplay: true,
+    smartSpeed: 1000,
+    center: true,
+    margin: 30,
+    dots: true,
+    loop: true,
+    responsive: {
+      0: { items: 1 },
+      768: { items: 2 },
+      992: { items: 3 },
+    },
+  });
   // -------------------- RELOAD GO TO HOME PAGE -------------------- //
 
   window.addEventListener("DOMContentLoaded", () => {
