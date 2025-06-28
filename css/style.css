@@ -11,6 +11,12 @@
   --border-color: #e5e7eb;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--text-color);
@@ -33,6 +39,7 @@ body.dark-mode {
 .container-fluid {
   max-width: 1366px;
 }
+
 
 /* -------------------- LOADER SECTION CSS -------------------- */
 
