@@ -6,10 +6,13 @@
   // loader
   var loader = function () {
     setTimeout(function () {
-      if ($("#loader").length > 0) {
-        $("#loader").fadeOut("slow", function () {
-          $(this).remove();
-        });
+      const loaderElement = document.getElementById("loader");
+      if (loaderElement) {
+        loaderElement.style.opacity = "0";
+        loaderElement.style.visibility = "hidden";
+        setTimeout(() => {
+          loaderElement.remove();
+        }, 1000);
       }
     }, 2000);
   };
