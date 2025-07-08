@@ -13,7 +13,7 @@ const sr = ScrollReveal({
 
 /* --------------------  NAVBAR SECTION REVEAL -------------------- */
 
-  sr.reveal('.custom-navbar', {
+  sr.reveal('.modern-navbar', {
     origin: 'top',
     distance: '40px',
     duration: 1000,

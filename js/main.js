@@ -1,77 +1,292 @@
-//----------------GENERAL JAVASCRIPT----------------//
+/* -------------------- PRELOADER -------------------- */
 
-(function ($) {
-  "use strict";
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) {
+    loader.style.transition = "opacity 0.6s ease";
+    loader.style.opacity = "0";
+    loader.style.pointerEvents = "none";
+    setTimeout(() => loader.remove(), 700);
+  }
+});
 
-  // loader
-  var loader = function () {
-    setTimeout(function () {
-      const loaderElement = document.getElementById("loader");
-      if (loaderElement) {
-        loaderElement.style.opacity = "0";
-        loaderElement.style.visibility = "hidden";
-        setTimeout(() => {
-          loaderElement.remove();
-        }, 1000);
-      }
-    }, 2000);
-  };
-  loader();
+/* -------------------- CURRENT YEAR -------------------- */
 
-  // -------------------- YEAR CURRENT  -------------------- //
+document.addEventListener("DOMContentLoaded", () => {
+  const yearSpan = document.getElementById("year");
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+});
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+/* -------------------- DARK MODE FUNCTIONALITY -------------------- */
 
-  // -------------------- NAVBAR MOBILE MOOD -------------------- //
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const checkbox = document.getElementById("checkbox");
-    const navbar = document.getElementById("mainNavbar");
-
-    function toggleNavbar() {
-      if (window.innerWidth <= 991) {
-        if (checkbox.checked) {
-          navbar.style.maxHeight = "500px";
-        } else {
-          navbar.style.maxHeight = "0";
-        }
-      } else {
-        navbar.style.maxHeight = "1000px";
-      }
-    }
-
-    checkbox.addEventListener("change", toggleNavbar);
-    window.addEventListener("resize", toggleNavbar);
-    toggleNavbar();
-  });
-
-  // -------------------- DARK MODE -------------------- //
-
-  const switchToggle = document.getElementById("switch");
+document.addEventListener("DOMContentLoaded", () => {
+  const darkModeToggle = document.getElementById("switch");
   const body = document.body;
-
-  // Apply saved theme on load
-  document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      body.classList.add("dark-mode");
-      switchToggle.checked = true;
+  
+  // Check for saved dark mode preference or system preference
+  const getDarkModePreference = () => {
+    const saved = localStorage.getItem("darkMode");
+    if (saved !== null) {
+      return saved === "true";
     }
-  });
+    // Check system preference
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  };
 
-  // Toggle dark mode on switch
-  switchToggle.addEventListener("change", () => {
-    if (switchToggle.checked) {
+  // Apply dark mode styles
+  const applyDarkMode = (isDark) => {
+    if (isDark) {
       body.classList.add("dark-mode");
-      localStorage.setItem("theme", "dark");
+      document.documentElement.setAttribute("data-theme", "dark");
     } else {
       body.classList.remove("dark-mode");
-      localStorage.setItem("theme", "light");
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+    
+    // Update toggle state
+    if (darkModeToggle) {
+      darkModeToggle.checked = isDark;
+    }
+    
+    // Save preference
+    localStorage.setItem("darkMode", isDark.toString());
+    
+    // Trigger custom event for other components
+    window.dispatchEvent(new CustomEvent("themeChange", { detail: { isDark } }));
+  };
+
+  // Initialize dark mode
+  const initDarkMode = () => {
+    const isDark = getDarkModePreference();
+    applyDarkMode(isDark);
+  };
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    const isDark = !body.classList.contains("dark-mode");
+    applyDarkMode(isDark);
+    
+    // Add animation class for smooth transition
+    body.classList.add("theme-transition");
+    setTimeout(() => {
+      body.classList.remove("theme-transition");
+    }, 300);
+  };
+
+  // Event listeners
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("change", toggleDarkMode);
+  }
+
+  // Listen for system theme changes
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    if (localStorage.getItem("darkMode") === null) {
+      applyDarkMode(e.matches);
     }
   });
 
-  // -------------------- Owl Carousel Init for Testimonial -------------------- //
+  // Initialize on page load
+  initDarkMode();
+  
+  // Add keyboard shortcut (Ctrl/Cmd + J)
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "j") {
+      e.preventDefault();
+      toggleDarkMode();
+    }
+  });
+});
 
+/* -------------------- NAVBAR TOGGLE & SCROLL -------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const checkbox = document.getElementById("checkbox");
+  const navbarCollapse = document.querySelector(".navbar-collapse");
+
+  checkbox?.addEventListener("change", () => {
+    navbarCollapse?.classList.toggle("show", checkbox.checked);
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".navbar") && !e.target.closest(".toggle")) {
+      if (checkbox && checkbox.checked) {
+        checkbox.checked = false;
+        navbarCollapse?.classList.remove("show");
+      }
+    }
+  });
+
+  // Close mobile menu on Escape key
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && checkbox && checkbox.checked) {
+      checkbox.checked = false;
+      navbarCollapse?.classList.remove("show");
+    }
+  });
+
+  const navbar = document.querySelector(".navbar");
+  let lastScrollTop = 0;
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    navbar.style.top = scrollTop > lastScrollTop ? "-100px" : "0";
+    lastScrollTop = Math.max(scrollTop, 0);
+  });
+});
+
+/* -------------------- DROPDOWN MENU TOGGLE -------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".dropdown-toggle").forEach(toggle => {
+    toggle.addEventListener("click", e => {
+      e.preventDefault();
+      const parent = toggle.closest(".dropdown");
+      const menu = parent.querySelector(".dropdown-menu");
+      parent.classList.toggle("show");
+      menu?.classList.toggle("show");
+      menu?.classList.add("fade", "slide-down");
+    });
+  });
+
+  // Close dropdown when clicking on dropdown items
+  document.querySelectorAll(".dropdown-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const dropdown = item.closest(".dropdown");
+      const menu = dropdown?.querySelector(".dropdown-menu");
+      
+      // Close the dropdown
+      dropdown?.classList.remove("show");
+      menu?.classList.remove("show");
+      
+      // Close mobile menu if on mobile
+      if (window.innerWidth <= 991) {
+        document.getElementById("checkbox").checked = false;
+        document.querySelector(".navbar-collapse")?.classList.remove("show");
+      }
+    });
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".dropdown")) {
+      document.querySelectorAll(".dropdown").forEach(dropdown => {
+        dropdown.classList.remove("show");
+        const menu = dropdown.querySelector(".dropdown-menu");
+        menu?.classList.remove("show");
+      });
+    }
+  });
+});
+
+/* -------------------- SMOOTH SCROLL & ACTIVE LINK -------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".nav-link[href^='#']");
+  const offset = 70;
+
+  const setActiveLink = () => {
+    const fromTop = window.scrollY + offset;
+    links.forEach(link => {
+      const section = document.querySelector(link.getAttribute("href"));
+      if (section?.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+        links.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+      }
+    });
+  };
+
+  links.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute("href"));
+      if (target) {
+        window.scrollTo({ top: target.offsetTop - offset + 1, behavior: "smooth" });
+        if (window.innerWidth <= 991) {
+          document.getElementById("checkbox").checked = false;
+          document.querySelector(".navbar-collapse")?.classList.remove("show");
+        }
+      }
+    });
+  });
+
+  window.addEventListener("scroll", setActiveLink);
+  setActiveLink();
+});
+
+/* -------------------- BACK TO TOP BUTTON -------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const backToTopBtn = document.getElementById("backToTop");
+  if (!backToTopBtn) return;
+  window.addEventListener("scroll", () => {
+    const nearBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 200;
+    backToTopBtn.style.display = nearBottom ? "flex" : "none";
+  });
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
+
+/* -------------------- SECTION OBSERVER FOCUS -------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  let currentSection = null;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const section = entry.target;
+      if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+        if (currentSection !== section) {
+          document.querySelectorAll("[data-section]").forEach(sec => {
+            sec.classList.remove("active-focus");
+            sec.dataset.focusable = "false";
+          });
+          section.classList.add("active-focus");
+          section.dataset.focusable = "true";
+          currentSection = section;
+        }
+      }
+    });
+  }, {
+    threshold: [0.6],
+    rootMargin: "0px 0px -20% 0px"
+  });
+
+  document.querySelectorAll("[data-section]").forEach(section => {
+    observer.observe(section);
+    section.addEventListener("click", () => {
+      if (section.dataset.focusable === "true") {
+        switch (section.id) {
+          case "about": alert("Showing About Details"); break;
+          case "skills": alert("Opening Skills Modal"); break;
+          case "portfolio": alert("Opening Portfolio Showcase"); break;
+          case "contact": alert("Jump to Contact Form or expand details"); break;
+          default: alert("Section: " + section.id);
+        }
+      }
+    });
+  });
+});
+
+/* -------------------- TYPED.JS INITIALIZATION -------------------- */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const output = document.querySelector(".typed-text-output");
+  const stringsSource = document.querySelector(".typed-text");
+  if (output && stringsSource) {
+    new Typed(output, {
+      strings: stringsSource.textContent.split(", "),
+      typeSpeed: 100,
+      backSpeed: 20,
+      smartBackspace: false,
+      loop: true
+    });
+  }
+});
+
+/* -------------------- OWL CAROUSEL -------------------- */
+
+$(document).ready(function () {
   $(".testimonial-carousel").owlCarousel({
     autoplay: true,
     smartSpeed: 1000,
@@ -85,150 +300,6 @@
       992: { items: 3 },
     },
   });
-  // -------------------- RELOAD GO TO HOME PAGE -------------------- //
-
-  window.addEventListener("DOMContentLoaded", () => {
-    // Scroll to top instantly on page load
-    window.scrollTo(0, 0);
-
-    // Replace current hash with #home without affecting scroll
-    if (window.location.hash !== "#home") {
-      history.replaceState(null, null, "#home");
-    }
-  });
-
-  // -------------------- INITIALIZE WOW -------------------- //
-
-  new WOW().init();
-
-  // -------------------- BACK TO TOP -------------------- //
-
-  const backToTopBtn = document.getElementById("backToTop");
-
-  window.addEventListener("scroll", () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    // Show only if the user is near the bottom (e.g., within 200px of the bottom)
-    if (scrollTop + windowHeight >= documentHeight - 200) {
-      backToTopBtn.style.display = "flex";
-    } else {
-      backToTopBtn.style.display = "none";
-    }
-  });
-
-  backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
-
-  // -------------------- INTERACTION TO ALLOW SCROLL ON MOBILE -------------------- //
-
-  let currentSection = null;
-
-  // Setup observer
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const section = entry.target;
-
-        // Check if the section is intersecting at more than 60%
-        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
-          // Only update if the section changed
-          if (currentSection !== section) {
-            // Remove active state from all
-            document.querySelectorAll("[data-section]").forEach((sec) => {
-              sec.classList.remove("active-focus");
-              sec.dataset.focusable = "false";
-            });
-
-            // Add active state to current section
-            section.classList.add("active-focus");
-            section.dataset.focusable = "true";
-            currentSection = section;
-          }
-        }
-      });
-    },
-    {
-      threshold: [0.6], // using array to improve clarity
-      rootMargin: "0px 0px -20% 0px", // optional: helps with early triggering
-    }
-  );
-
-  // Attach observer to all target sections
-  document.querySelectorAll("[data-section]").forEach((section) => {
-    observer.observe(section);
-  });
-
-  // Observe all sections
-  document.querySelectorAll("[data-section]").forEach((section) => {
-    observer.observe(section);
-
-    // Add click/tap listener
-    section.addEventListener("click", () => {
-      if (section.dataset.focusable === "true") {
-        handleSectionClick(section.id);
-      }
-    });
-  });
-
-  // Handle the 1-tap action
-  function handleSectionClick(id) {
-    switch (id) {
-      case "about":
-        alert("Showing About Details");
-        break;
-      case "skills":
-        alert("Opening Skills Modal");
-        break;
-      case "portfolio":
-        alert("Opening Portfolio Showcase");
-        break;
-      case "contact":
-        alert("Jump to Contact Form or expand details");
-        break;
-      default:
-        alert("Section: " + id);
-    }
-  }
-
-  // -------------------- TYPED INITIATE -------------------- //
-
-  $(document).ready(function () {
-    if ($(".typed-text-output").length == 1) {
-      var typed_strings = $(".typed-text").text();
-      var typed = new Typed(".typed-text-output", {
-        strings: typed_strings.split(", "),
-        typeSpeed: 100,
-        backSpeed: 20,
-        smartBackspace: false,
-        loop: true,
-      });
-    }
-  });
-
-  // -------------------- PRELOADER -------------------- //
-
-  window.addEventListener("load", () => {
-    const loaderWrapper = document.getElementById("loader");
-
-    if (loaderWrapper) {
-      loaderWrapper.style.transition = "opacity 0.6s ease";
-      loaderWrapper.style.opacity = "0";
-      loaderWrapper.style.pointerEvents = "none";
-
-      // Optional: remove from DOM after fade-out
-      setTimeout(() => {
-        loaderWrapper.remove();
-      }, 700); // slightly longer than the transition
-    }
-  });
-
-  // -------------------- INITIALIZE OWL CAROUSEL -------------------- //
 
   $(".owl-carousel").owlCarousel({
     items: 1,
@@ -238,234 +309,96 @@
     autoplayTimeout: 3000,
     autoplayHoverPause: true,
   });
+});
 
-  // -------------------- SMOOTH SCROLLING FOR NAVIGATION LINKS -------------------- //
+/* -------------------- PARTICLES.JS -------------------- */
 
-  $('a[href*="#"]').on("click", function (e) {
-    e.preventDefault();
-    $("html, body").animate(
-      {
-        scrollTop: $($(this).attr("href")).offset().top - 0,
-      },
-      500,
-      "linear"
-    );
-  });
-
-  // -------------------- PARTICLES JS -------------------- //
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.particlesJS) {
     particlesJS("particles-js", {
       particles: {
-        number: {
-          value: 100,
-          density: {
-            enable: true,
-            value_area: 800,
-          },
-        },
-        color: {
-          value: "#FFFFFF",
-        },
-        shape: {
-          type: "circle",
-          stroke: {
-            width: 0,
-            color: "#FFFFFF",
-          },
-        },
-        opacity: {
-          value: 0.5,
-          random: false,
-        },
-        size: {
-          value: 3,
-          random: true,
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: "none",
-          random: false,
-          straight: false,
-        },
+        number: { value: 100, density: { enable: true, value_area: 800 } },
+        color: { value: "#FFFFFF" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 2 }
       },
       interactivity: {
-        detectsOn: "canvas",
         events: {
-          onhover: {
-            enable: true,
-            mode: "repulse",
-          },
-          onclick: {
-            enable: true,
-            mode: "push",
-          },
-        },
-      },
-    });
-
-    console.log("particles.js initialized!");
-  });
-
-  // -------------------- NAVBAR SCROLL -------------------- //
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const navbar = document.querySelector(".navbar");
-    const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
-    const sections = Array.from(navLinks).map((link) => {
-      const id = link.getAttribute("href").replace("#", "");
-      return document.getElementById(id);
-    });
-
-    function onScroll() {
-      // Optional: Add or remove .nav-sticky class
-      if (window.scrollY > 50) {
-        navbar.classList.add("nav-sticky");
-      } else {
-        navbar.classList.remove("nav-sticky");
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
       }
-
-      // Determine active section
-      let currentSectionId = null;
-      const scrollPos = window.scrollY + 100; // Adjust based on navbar height
-
-      sections.forEach((section) => {
-        if (section && section.offsetTop <= scrollPos) {
-          currentSectionId = section.id;
-        }
-      });
-
-      // -------------------- HIGHLIGHT THE CORRECT NAV LINK -------------------- //
-
-      navLinks.forEach((link) => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === `#${currentSectionId}`) {
-          link.classList.add("active");
-        }
-      });
-    }
-
-    // -------------------- SMOOTH SCROLL + COLLAPSE NAVBAR ON LINK CLICK -------------------- //
-
-    navLinks.forEach((link) => {
-      link.addEventListener("click", function (e) {
-        const targetId = this.getAttribute("href").substring(1);
-        const targetSection = document.getElementById(targetId);
-        if (targetSection) {
-          e.preventDefault();
-          window.scrollTo({
-            top: targetSection.offsetTop - 70,
-            behavior: "smooth",
-          });
-        }
-
-        // Collapse mobile menu
-        const navbarCollapse = document.getElementById("navbarCollapse");
-        if (navbarCollapse.classList.contains("show")) {
-          new bootstrap.Collapse(navbarCollapse).hide();
-        }
-      });
     });
+    console.log("particles.js initialized!");
+  }
+});
 
-    window.addEventListener("scroll", onScroll);
-  });
+/* -------------------- WOW.JS INITIALIZATION -------------------- */
 
-  // -------------------- INITIALIZE LIGHTBOX -------------------- //
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof WOW !== "undefined") new WOW().init();
+});
 
-  lightbox.option({
-    resizeDuration: 200,
-    wrapAround: true,
-    albumLabel: "Image %1 of %2",
-  });
+/* -------------------- LIGHTBOX CONFIGURATION -------------------- */
 
-  // -------------------- PORTFOLIO FILTER SECTION -------------------- //
+lightbox.option({
+  resizeDuration: 200,
+  wrapAround: true,
+  albumLabel: "Image %1 of %2",
+});
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const portfolioItems = document.querySelectorAll(".portfolio-item");
+/* -------------------- PORTFOLIO FILTER -------------------- */
 
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        // Toggle active state
-        filterButtons.forEach((btn) => btn.classList.remove("active"));
-        button.classList.add("active");
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".filter-btn");
+  const items = document.querySelectorAll(".portfolio-item");
 
-        const filterValue = button.dataset.filter.replace(".", "");
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
 
-        portfolioItems.forEach((item) => {
-          const match =
-            filterValue === "*" || item.classList.contains(filterValue);
-
-          // Add fade-in if visible, fade-out if hidden
-          if (match) {
-            item.style.display = "block";
-            item.classList.remove("animate__fadeOut");
-            item.classList.add("animate__animated", "animate__fadeIn");
-          } else {
-            item.classList.remove("animate__fadeIn");
-            item.classList.add("animate__fadeOut");
-
-            // Wait for animation before hiding
-            setTimeout(() => {
-              item.style.display = "none";
-            }, 300); // match fadeOut duration
-          }
-        });
+      const filter = btn.dataset.filter.replace(".", "");
+      items.forEach(item => {
+        const match = filter === "*" || item.classList.contains(filter);
+        item.style.display = match ? "block" : "none";
+        item.classList.toggle("animate__fadeIn", match);
+        item.classList.toggle("animate__fadeOut", !match);
       });
     });
   });
+});
 
-  // -------------------- JAVASCRIPT (DISABLE AND RE-ENABLE) -------------------- //
+/* -------------------- MODAL VIEW DISABLER -------------------- */
 
+document.addEventListener("DOMContentLoaded", () => {
   const viewBtn = document.getElementById("viewBtn");
   const liveDemoBtn = document.getElementById("liveDemoBtn");
   const modal = document.getElementById("modal3");
-  const closeBtn = modal.querySelector(".custom-modal-close");
+  const closeBtn = modal?.querySelector(".custom-modal-close");
 
   function setDisabled(state) {
-    viewBtn.disabled = state;
-    liveDemoBtn.classList.toggle("disabled", state);
+    if (viewBtn) viewBtn.disabled = state;
+    if (liveDemoBtn) liveDemoBtn.classList.toggle("disabled", state);
   }
 
-  // When "View Project" is clicked:
-  viewBtn.addEventListener("click", () => {
-    setDisabled(true); // Disable both
-    modal.style.display = "flex";
-    setTimeout(() => setDisabled(false), 3000); // Re-enable after 3s
+  viewBtn?.addEventListener("click", () => {
+    setDisabled(true);
+    if (modal) modal.style.display = "flex";
+    setTimeout(() => setDisabled(false), 3000);
   });
 
-  // Close the modal & re-enable
-  closeBtn.addEventListener("click", () => {
+  closeBtn?.addEventListener("click", () => {
     modal.style.display = "none";
     setDisabled(false);
   });
 
-  // Optional: click outside to close
-  window.addEventListener("click", (e) => {
+  window.addEventListener("click", e => {
     if (e.target === modal) {
       modal.style.display = "none";
       setDisabled(false);
     }
   });
-
-  // -------------------- NAVBAR HIDE ON SCROLL -------------------- //
-
-  let lastScrollTop = 0;
-  const navbar = document.querySelector(".navbar");
-
-  window.addEventListener("scroll", function () {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > lastScrollTop) {
-      // Scrolling down
-      navbar.style.top = "-100px"; // hide navbar
-    } else {
-      // Scrolling up
-      navbar.style.top = "0";
-    }
-
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
-  });
-
-  // -------------------- END OF SCRIPT -------------------- //
-})(jQuery);
+});
