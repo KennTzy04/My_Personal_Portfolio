@@ -1858,8 +1858,10 @@ body.dark-mode .toggle:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   padding: 15px;
   z-index: 999;
-  min-width: 200px;
-  font-size: 14px;
+  min-width: 240px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
 }
 .submenu.open {
   display: block;
@@ -1940,110 +1942,6 @@ body.dark-mode .toggle:hover {
   transform: translateY(5px);
 }
 
-/* === 320px (Mobile M) === */
-
-@media (min-width: 320px) {
-  .link,
-  .btn-second {
-    min-width: 120px;
-    max-width: 90vw;
-    font-size: 0.70rem;
-    margin: 10px auto;
-    padding: 10px 0;
-    display: block;
-
-  }
-}
-
-/* === 375px (Mobile M) === */
-@media (min-width: 375px) {
-  .link,
-  .btn-second {
-    min-width: 150px;
-    max-width: 90vw;
-    font-size: 0.80rem;
-    margin: 10px auto;
-    padding: 10px 0;
-    display: block;
-
-  }
-}
-
-/* === 425px (Mobile L) === */
-@media (min-width: 425px) {
-  .link,
-  .btn-second {
-    min-width: 150px;
-    max-width: 90vw;
-    font-size: 0.80rem;
-    margin: 10px auto;
-    padding: 10px 0;
-    display: block;
-  }
-}
-
-/* === 768px (Tablet) === */
-@media (min-width: 768px) {
-  .menu {
-    gap: 50px;
-    padding-left: 10px;
-    margin-top: 25px;
-   
-  }
-
-  .btn-second,
-  .link {
-    width: 150px;
-    font-size: 0.80rem;
-    margin: 0 auto;
-    align-items: center;
-    text-align: center;
-    justify-content: center;     
-    display: flex
-  }
-}
-
-/* === 1024px (Laptop) === */
-@media (min-width: 1024px) {
-  .menu {
-    justify-content: flex-start;
-    padding-left: 36px;
-    margin-top: 25px;
-
-  }
-
-  .btn-second,
-  .link {
-    width: 170px;
-    font-size: 1rem;
-    margin: 0 auto;
-    align-items: center;
-    text-align: center;
-    justify-content: center;     
-    display: flex; 
-  }
-}
-
-/* === 1440px (Laptop L) === */
-@media (min-width: 1440px) {
-  .menu {
-    justify-content: flex-start;
-    padding-left: 50px;
-    gap: 40px;
-    margin-top: 50px;
-  }
-
-  .link,
-  .btn-second {
-    width: 200px;
-    font-size: 1.1rem;
-    align-items: center;
-    text-align: center;
-    justify-content: center;     
-    display: flex;
-
-  }
-}
 
 /* -------------------- HERO IMAGE CONTAINER SECTION CSS -------------------- */
 
@@ -2152,7 +2050,18 @@ body.dark-mode .toggle:hover {
   .hero .hero-text .typed-cursor {
     font-size: 20px; 
   }
-
+  .link, .btn-second {
+    min-width: 120px;
+    max-width: 90vw;
+    font-size: 0.70rem;
+    margin: 10px auto;
+    padding: 10px 0;
+    display: block;
+  }
+  .icon-space {
+  margin-right: 0.5rem; 
+  vertical-align: middle;
+  }
 }
 
 /* 375px - Mobile M */
@@ -2167,11 +2076,16 @@ body.dark-mode .toggle:hover {
     font-size: 22px; 
   }
   .hero .hero-text .typed-cursor {
-   font-size: 22px; 
+    font-size: 22px; 
   }
-
-
-
+  .link, .btn-second {
+    min-width: 150px;
+    max-width: 90vw;
+    font-size: 0.80rem;
+    margin: 10px auto;
+    padding: 10px 0;
+    display: block;
+  } 
 }
 
 /* 425px - Mobile L */
@@ -2192,11 +2106,10 @@ body.dark-mode .toggle:hover {
      font-size: 25px;
      margin-top: 25px;
   }
+
   .hero .hero-text .typed-cursor {
     font-size: 24px; 
   }
-
-
 
   .hero .hero-image {
     padding: 18px;
@@ -2208,6 +2121,20 @@ body.dark-mode .toggle:hover {
     padding-left: 30px;
     padding-right: 30px;
   }
+
+  .link, .btn-second {
+    min-width: 150px;
+    max-width: 90vw;
+    font-size: 0.80rem;
+    margin: 10px auto;
+    padding: 10px 0;
+    display: block;
+  }
+  
+  .icon-space {
+    margin-right: 0.5rem; 
+    vertical-align: middle;
+  } 
 }
 
 /* 768px - Tablet */
@@ -2261,6 +2188,28 @@ body.dark-mode .toggle:hover {
     padding-left: 30px;
     padding-right: 30px;
   }
+
+  
+  .menu {
+    gap: 50px;
+    padding-left: 10px;
+    margin-top: 25px;
+   
+  }
+
+  .btn-second, .link {
+    width: 150px;
+    font-size: 0.80rem;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    justify-content: center;     
+    display: flex
+  }
+  .icon-space {
+    margin-right: 0.5rem; 
+    vertical-align: middle;
+  }
 }
 
 /* 1024px - Laptop */
@@ -2280,13 +2229,13 @@ body.dark-mode .toggle:hover {
   }
 
   .hero .hero-text h1 {
-    font-size: 48px;
+    font-size: 47px;
     margin-bottom: 14px;
     margin-right: 12px;
   }
 
   .hero .hero-text h2 {
-    font-size: 30px;
+    font-size: 26px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2314,6 +2263,26 @@ body.dark-mode .toggle:hover {
   .container-fluid {
     padding-left: 50px;
     padding-right: 50px;
+  }
+
+  .menu {
+    justify-content: flex-start;
+    padding-left: 25px;
+    margin-top: 25px;
+  }
+
+  .btn-second, .link {
+    width: 180px;
+    font-size: 1rem;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    justify-content: center;     
+    display: flex; 
+  }
+  .icon-space {
+    margin-right: 0.1rem; 
+    vertical-align: middle;
   }
 }
 
@@ -2362,6 +2331,22 @@ body.dark-mode .toggle:hover {
   .container-fluid {
     padding-left: 80px;
     padding-right: 80px;
+  }
+
+  .menu {
+    justify-content: flex-start;
+    padding-left: 50px;
+    gap: 40px;
+    margin-top: 50px;
+  }
+
+  .link, .btn-second {
+    width: 200px;
+    font-size: 1.1rem;
+    align-items: center;
+    text-align: center;
+    justify-content: center;     
+    display: flex;
   }
 }
 /* -------------------- SOCIAL ICONS HERO SECTION CSS -------------------- */
