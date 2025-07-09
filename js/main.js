@@ -97,6 +97,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+/* -------------------- PDF DONDLOAD SECTION -------------------- */
+
+function toggleCustomDropdown(event) {
+  event.stopPropagation();
+
+  const dropdown = event.currentTarget.nextElementSibling;
+  const isOpen = dropdown.classList.contains('open');
+
+  // Close all dropdowns first (optional)
+  document.querySelectorAll('.submenu.open').forEach(el => el.classList.remove('open'));
+
+  // Toggle current dropdown only if it was closed
+  if (!isOpen) {
+    dropdown.classList.add('open');
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function () {
+  document.querySelectorAll('.submenu.open').forEach(el => el.classList.remove('open'));
+});
 /* -------------------- NAVBAR TOGGLE & SCROLL -------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
