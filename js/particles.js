@@ -1,16 +1,6 @@
-const stats = new Stats();
-stats.showPanel(0);
-stats.dom.style.position = "absolute";
-stats.dom.style.left = "0px";
-stats.dom.style.top = "0px";
-document.body.appendChild(stats.dom);
-
 const count_particles = document.querySelector(".js-count-particles");
 
 function updateStats() {
-  stats.begin();
-  stats.end();
-
   const particles = window.pJSDom?.[0]?.pJS?.particles?.array;
   if (particles && count_particles) {
     count_particles.innerText = particles.length;
@@ -73,22 +63,4 @@ function loadParticles(particleColor = "#00FFFF", lineColor = "#00FFFF") {
 // Initial load
 loadParticles();
 
-// Dark mode toggle
-const darkModeToggle = document.getElementById("darkModeToggle");
-darkModeToggle.addEventListener("change", () => {
-  const isDark = darkModeToggle.checked;
-  document.body.classList.toggle("dark-mode", isDark);
 
-  const newColor = isDark ? "#00FFFF" : "#00FFFF";
-
-  // Destroy current particles instance
-  if (window.pJSDom[0]) {
-    window.pJSDom[0].pJS.fn.vendors.destroypJS();
-    window.pJSDom = [];
-  }
-
-  // Give it a short delay before reinitializing
-  setTimeout(() => {
-    loadParticles(newColor, newColor);
-  }, 100); // 100ms delay helps ensure canvas is fully cleared
-});
