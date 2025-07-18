@@ -1,15 +1,6 @@
-
 /* -------------------- PRELOADER -------------------- */
 
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  if (loader) {
-    loader.style.transition = "opacity 0.6s ease";
-    loader.style.opacity = "0";
-    loader.style.pointerEvents = "none";
-    setTimeout(() => loader.remove(), 700);
-  }
-});
+
 
 /* -------------------- CURRENT YEAR -------------------- */
 
@@ -208,52 +199,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const setActiveLink = () => {
     const fromTop = window.scrollY + offset;
-
     links.forEach(link => {
-      const targetId = link.getAttribute("href");
-      if (!targetId || targetId === "#") return;
-
-      const section = document.querySelector(targetId);
-      if (!section) return;
-
-      if (
-        section.offsetTop <= fromTop &&
-        section.offsetTop + section.offsetHeight > fromTop
-      ) {
+      const section = document.querySelector(link.getAttribute("href"));
+      if (section?.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
         links.forEach(l => l.classList.remove("active"));
         link.classList.add("active");
       }
     });
   };
 
-  // Smooth scroll and close nav toggle on click
   links.forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
       const target = document.querySelector(link.getAttribute("href"));
       if (target) {
-        window.scrollTo({
-          top: target.offsetTop - offset + 1,
-          behavior: "smooth"
-        });
-
-        // Close mobile menu if in mobile view
+        window.scrollTo({ top: target.offsetTop - offset + 1, behavior: "smooth" });
         if (window.innerWidth <= 991) {
-          const checkbox = document.getElementById("checkbox");
-          if (checkbox) checkbox.checked = false;
-
-          // If using Bootstrap collapse menu too
-          const navbarCollapse = document.querySelector(".navbar-collapse");
-          if (navbarCollapse && navbarCollapse.classList.contains("show")) {
-            navbarCollapse.classList.remove("show");
-          }
+          document.getElementById("checkbox").checked = false;
+          document.querySelector(".navbar-collapse")?.classList.remove("show");
         }
       }
     });
   });
 
   window.addEventListener("scroll", setActiveLink);
-  setActiveLink(); // Run on load
+  setActiveLink();
 });
 
 /* -------------------- BACK TO TOP BUTTON -------------------- */
