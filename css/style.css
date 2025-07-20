@@ -1853,13 +1853,13 @@ body.dark-mode .toggle:hover {
   position: absolute;
   left: 0;
   top: 100%;
-  background: white;
+  background: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   padding: 15px;
   z-index: 999;
   min-width: 200px;
-  font-size: 14px;
+  font-size: 13px;
 }
 .submenu.open {
   display: block;
@@ -5000,6 +5000,16 @@ body.dark-mode .toggle:hover {
   box-shadow: 0 0 12px rgba(0, 255, 229, 0.4);
 }
 
+.project-description {
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  color: #333;
+  line-height: 1.5;
+  margin-top: 25px;
+  text-align: left;
+  padding: 0 10px;
+}
 /* -------------------- PORTFOLIO MODAL RESPONSIVE SECTIONS CSS -------------------- */
 
 @media (max-width: 1200px) {
