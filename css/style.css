@@ -5010,6 +5010,70 @@ body.dark-mode .toggle:hover {
   text-align: left;
   padding: 0 10px;
 }
+
+/* -------------------- PORTFOLIO MODAL 1  SECTIONS CSS -------------------- */
+
+/* Container for single image (centered) */
+.portfolio-thumb-single { 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+/* Default image style */
+.portfolio-thumb-single img.zoomable {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  cursor: zoom-in;
+  transition: all 0.3s ease-in-out;
+  transform-origin: center center;
+  z-index: 1;
+}
+
+/* Fullscreen zoomed image */
+img.zoomed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain;
+  background-color: rgba(0, 0, 0, 1);
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  z-index: 9999;
+  cursor: zoom-out;
+}
+
+/* === Close Button === */
+.zoom-close-btn {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.zoom-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ff4e4e;
+}
 /* -------------------- PORTFOLIO MODAL RESPONSIVE SECTIONS CSS -------------------- */
 
 @media (max-width: 1200px) {

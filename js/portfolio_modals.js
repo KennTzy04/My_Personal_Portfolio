@@ -1,7 +1,6 @@
 // -------------------- PORTFOLIO FILTER LOGIC -------------------- //
 
 document.addEventListener("DOMContentLoaded", function () {
-  
   const filterButtons = document.querySelectorAll(".filter-btn");
   const portfolioItems = document.querySelectorAll(".portfolio-item");
 
@@ -162,12 +161,55 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // -------------------- PORTFOLIO STOP VIDEO INSIDE LOGIC -------------------- //
-  
+
   function stopVideoInModal(modal) {
     const video = modal.querySelector("video");
     if (video) {
       video.pause();
       video.currentTime = 0;
     }
+  }
+});
+
+// -------------------- PORTFOLIO MODAL SINGLE/ZOOM LOGIC -------------------- //
+
+document.querySelectorAll('.portfolio-thumb-single img.zoomable').forEach((img) => {
+  img.addEventListener('click', () => {
+    // Clone the image
+    const zoomedImg = img.cloneNode(true);
+    zoomedImg.classList.add('zoomed');
+
+    // Create a close button
+    const closeBtn = document.createElement('span');
+    closeBtn.classList.add('zoom-close-btn');
+    closeBtn.innerHTML = '&times;'; // X symbol
+
+    // Close zoom on button click
+    closeBtn.addEventListener('click', () => {
+      zoomedImg.remove();
+      closeBtn.remove();
+      document.body.classList.remove('zoom-active');
+    });
+
+    // Add close on image click too
+    zoomedImg.addEventListener('click', () => {
+      zoomedImg.remove();
+      closeBtn.remove();
+      document.body.classList.remove('zoom-active');
+    });
+
+    // Append to body
+    document.body.appendChild(zoomedImg);
+    document.body.appendChild(closeBtn);
+    document.body.classList.add('zoom-active');
+  });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const zoomedImg = document.querySelector('img.zoomed');
+    const closeBtn = document.querySelector('.zoom-close-btn');
+    if (zoomedImg) zoomedImg.remove();
+    if (closeBtn) closeBtn.remove();
+    document.body.classList.remove('zoom-active');
   }
 });
